@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.admin.websocketdemo.Model.WebSocketManager;
 import com.example.admin.websocketdemo.Presenter.DataPresenter;
@@ -33,8 +32,8 @@ public class MainActivity extends AppCompatActivity implements DataView {
         if (savedInstanceState != null) {
             message = savedInstanceState.getString(LOG_TEXT);
             viewById.setText(message);
-            logIt("        if (savedInstanceState != null) {");
             webSocketManager = savedInstanceState.getParcelable(WEB_SOCKET_MANAGER);
+            if (webSocketManager != null) webSocketManager.setDataView(this);
         }
         if (webSocketManager == null) {
             webSocketManager = new WebSocketManager(MainActivity.this);
@@ -108,16 +107,19 @@ public class MainActivity extends AppCompatActivity implements DataView {
         logIt(s);
     }
 
-
     private void logIt(final String s) {
         runOnUiThread(() -> {
             Log.d("newF", "MainActivity hash-code : " + MainActivity.this.hashCode());
             String s1 = s + "\n\n" + viewById.getText();
             viewById.setText(s1);
-            Toast.makeText(MainActivity.this, s1, Toast.LENGTH_SHORT).show();
         });
     }
 
+    /**
+     * Clear existing logs on view.
+     *
+     * @param view : Clear Button on Main Screen.
+     */
     public void onClearLogClicked(View view) {
         viewById.setText("");
     }

@@ -137,4 +137,9 @@ public class WebSocketManager implements DataPresenter {
         parcel.writeValue(mWebSocketClient);
         parcel.writeValue(dataView);
     }
+
+    @Override
+    public void setDataView(DataView dataView) {
+        this.dataView = dataView;
+    }
 }

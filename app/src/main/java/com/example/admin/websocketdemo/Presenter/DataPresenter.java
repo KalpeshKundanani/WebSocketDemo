@@ -4,6 +4,8 @@ package com.example.admin.websocketdemo.Presenter;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.admin.websocketdemo.View.DataView;
+
 public interface DataPresenter extends Parcelable {
     void connectWebSocket();
     void sendMsgToServer(String msg);
@@ -15,4 +17,6 @@ public interface DataPresenter extends Parcelable {
 
     @Override
     void writeToParcel(Parcel parcel, int i);
+
+    void setDataView(DataView dataView);
 }
